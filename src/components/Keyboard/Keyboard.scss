@@ -1,0 +1,45 @@
+.keyboard-container {    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 2.4rem;
+    
+    .keyboard-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: space-between;
+        
+        & + .keyboard-content {
+            margin-top: 6px;
+        }
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 56px;
+            height: 56px;
+
+            background: #333;
+            color: #fff;
+
+            font-size: 1.2rem;
+            font-weight: bold;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            &:not(.first-key){
+                margin-left: 6px;
+            }
+
+            &.key-enter {
+                margin-left: 18px;
+                width: 112px;
+            }
+        }
+    }
+}
