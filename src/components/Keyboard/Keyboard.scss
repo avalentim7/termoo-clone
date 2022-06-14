@@ -32,7 +32,7 @@
 
             cursor: pointer;
 
-            &:not(.first-key){
+            &:not(:first-child){
                 margin-left: 6px;
             }
 

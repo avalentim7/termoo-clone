@@ -29,7 +29,7 @@
 
             border-radius: 8px;
 
-            &:not(.first-key) {
+            &:not(:first-child) {
                 margin-left: 6px;
             }
         }
@@ -44,7 +44,6 @@
 
             &.--selected {
                 border-bottom: 8px #333 solid;
-                transform: scale(1.05);
             }
         }
     }

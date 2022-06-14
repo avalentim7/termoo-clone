@@ -1,21 +1,60 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { AttemptsContext } from '../../../context/AttemptsContext';
 
-function AttemptKeys() {
-    const [selectedPosition, setSelectedPosition] = useState(1);
+import words from '../../../words.json';
 
-    const handleClick = (data) => {
-        console.log(data);
-        setSelectedPosition(data);
+interface AttemptKeysProps {
+    wordAttempt: string;
+}
+
+function AttemptKeys({ wordAttempt }: AttemptKeysProps) {
+    const { selectedPosition, handleChangeKeyPosition } = useContext(AttemptsContext);
+    const wordOfTheDay = words[0].word.toUpperCase();
+    const wordSplitted = wordOfTheDay.split("");
+
+    const getClass = (position: number) => {
+        return `key ${selectedPosition === position ? ' --selected' : ''}    
+        ${wordSplitted[position - 1] === wordAttempt[position] ?
+                ' --correct-position' :
+                wordOfTheDay.indexOf(wordAttempt[position]) !== -1 ?
+                    '--incorrect-position' :
+                    ''
+            }`
     }
 
     return (
         <>
-            <div onClick={() => handleClick(1)} className={`key first-key${selectedPosition === 1 ? ' --selected' : ''}`}></div>
-            <div onClick={() => handleClick(2)} className={`key second-key${selectedPosition === 2 ? ' --selected' : ''}`}></div>
-            <div onClick={() => handleClick(3)} className={`key third-key${selectedPosition === 3 ? ' --selected' : ''}`}></div>
-            <div onClick={() => handleClick(4)} className={`key fourth-key${selectedPosition === 4 ? ' --selected' : ''}`}></div>
-            <div onClick={() => handleClick(5)} className={`key fifth-key${selectedPosition === 5 ? ' --selected' : ''}`}></div>
+            <div
+                onClick={() => handleChangeKeyPosition(1)}
+                className={getClass(1)}
+            >
+                {[wordAttempt[1]]}
+            </div>
+            <div
+                onClick={() => handleChangeKeyPosition(2)}
+                className={getClass(2)}
+            >
+                {[wordAttempt[2]]}
+            </div>
 
+            <div
+                onClick={() => handleChangeKeyPosition(3)}
+                className={getClass(3)}
+            >
+                {[wordAttempt[3]]}
+            </div>
+            <div
+                onClick={() => handleChangeKeyPosition(4)}
+                className={getClass(4)}
+            >
+                {[wordAttempt[4]]}
+            </div>
+            <div
+                onClick={() => handleChangeKeyPosition(5)}
+                className={getClass(5)}
+            >
+                {[wordAttempt[5]]}
+            </div>
         </>
     )
 }

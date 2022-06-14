@@ -1,34 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AttemptsContext } from '../../context/AttemptsContext';
 import AttemptKeys from './AttemptKeys/AttemptKeys';
 
 import './Attempts.scss';
 
 function Attempts() {
-    const { handleTeste } = useContext(AttemptsContext);
-
-    //TODO: Realizar o Handle do AttemptKeys
+    const { attempt, wordAttempts } = useContext(AttemptsContext);
 
     return (
         <div className="attempts-container">
-            <div className="attempt first-attempt finished-attempt">
-                <AttemptKeys />
-            </div>
-            <div className="attempt second-attempt actual-attempt">
-                <AttemptKeys />
-            </div>
-            <div className="attempt third-attempt">
-                <AttemptKeys />
-            </div>
-            <div className="attempt fourth-attempt">
-                <AttemptKeys />
-            </div>
-            <div className="attempt fifth-attempt">
-                <AttemptKeys />
-            </div>
-            <div className="attempt sixth-attempt">
-                <AttemptKeys />
-            </div>
+            {Object.values(wordAttempts).map((wordAttempt, i) => {
+                return (
+                    <div key={i} className={`attempt ${attempt === i + 1 ? 'actual-attempt' : attempt > i + 1 ? 'finished-attempt' : ''}`}>
+                        <AttemptKeys
+                            wordAttempt={wordAttempt}
+                        />
+                    </div>
+                )
+            })}
         </div>
     )
 }
